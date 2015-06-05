@@ -1,0 +1,38 @@
+{
+  "name": "place-my-order-api",
+  "version": "0.1.0",
+  "description": "The REST and real-time API for place-my-order.com. Built with Feathers and MongoDB.",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "PORT=3030 bin/place-my-order-api",
+    "publish": "git push origin --tags",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish",
+    "jshint": "jshint lib/. test/. --config",
+    "mocha": "mocha test/ --recursive",
+    "test": "npm run jshint && npm run mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitovi/place-my-order-api.git"
+  },
+  "author": "Bitovi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bitovi/place-my-order-api/issues"
+  },
+  "homepage": "https://github.com/bitovi/place-my-order-api",
+  "devDependencies": {
+    "jshint": "^2.7.0",
+    "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "babel": "^5.5.3",
+    "body-parser": "^1.12.4",
+    "feathers": "^1.1.0-pre.0",
+    "feathers-hooks": "^0.5.0",
+    "feathers-mongodb": "^0.3.3",
+    "madison": "0.0.7"
+  }
+}
