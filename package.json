@@ -1,6 +1,6 @@
 {
   "name": "place-my-order-api",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "The REST and real-time API for place-my-order.com. Built with Feathers and MongoDB.",
   "main": "lib/index.js",
   "bin": {
