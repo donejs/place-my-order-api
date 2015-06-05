@@ -10,7 +10,7 @@
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
     "jshint": "jshint lib/. test/. --config",
-    "mocha": "mocha test/ --recursive",
+    "mocha": "mocha test/ --recursive --compilers js:babel/register",
     "test": "npm run jshint && npm run mocha"
   },
   "repository": {
