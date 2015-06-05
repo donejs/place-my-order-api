@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-require('babel/register');
-
 var app = require('../lib');
 var server = app.listen(require('../lib/config').port);
 
