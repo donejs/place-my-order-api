@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "The REST and real-time API for place-my-order.com. Built with Feathers and MongoDB.",
   "main": "lib/index.js",
+  "bin": {
+    "place-my-order-api": "./bin/place-my-order-api"
+  },
   "scripts": {
     "start": "PORT=3030 bin/place-my-order-api",
     "publish": "git push origin --tags",
