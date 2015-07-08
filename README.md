@@ -25,7 +25,7 @@ Then start with:
 The default port is `3030`. Some default data will be initialized on the first start.
 You can now find the API at [http://localhost:3030](http://localhost:3030).
 
-## Envrionment variables
+## Environment variables
 
 You can configure the API by setting the following environment variables:
 
