@@ -15,28 +15,26 @@ module.exports = function(api) {
     }
   };
 
-  restaurantService.store.dropDatabase(function() {
-    console.log('Dropped database');
-    restaurants.forEach(function(restaurant) {
-      restaurantService.create(restaurant, {}, function(error, restaurant) {
-        console.log('Created restaurant ' +
-        restaurant.name + '(' + restaurant._id + ')');
+  console.log('Dropped database');
+  restaurants.forEach(function(restaurant) {
+    restaurantService.create(restaurant, {}, function(error, restaurant) {
+      console.log('Created restaurant ' +
+      restaurant.name + '(' + restaurant._id + ')');
 
-        orders.forEach(function(order) {
-          if(order.restaurantIndex === count) {
+      orders.forEach(function(order) {
+        if(order.restaurantIndex === count) {
 
-            delete order.restaurantIndex;
-            order.slug = restaurant.slug;
-            orderService.create(order, {}, function(error, order) {
-              console.log('Created order', order._id, 'from', restaurant.name);
-              check();
-            });
-          }
-        });
-
-        restaurantCount++;
-        check();
+          delete order.restaurantIndex;
+          order.slug = restaurant.slug;
+          orderService.create(order, {}, function(error, order) {
+            console.log('Created order', order._id, 'from', restaurant.name);
+            check();
+          });
+        }
       });
+
+      restaurantCount++;
+      check();
     });
   });
 };
