@@ -1,7 +1,7 @@
 import feathers from 'feathers';
 import bodyParser from 'body-parser';
 import hooks from 'feathers-hooks';
-import mongodb from 'feathers-mongodb';
+import NeDB from 'feathers-nedb';
 import madison from 'madison';
 
 import config from './config';
@@ -50,14 +50,8 @@ const api = feathers()
 
       return Object.keys(result).map(key => result[key]);
     }))
-    .use('/restaurants', mongodb({
-      collection: 'restaurants',
-      connectionString: config.mongodb
-    }))
-    .use('/orders', mongodb({
-      collection: 'orders',
-      connectionString: config.mongodb
-    }));
+    .use('/restaurants', new NeDB('restaurants'))
+    .use('/orders', new NeDB('orders'));
 
   api.service('orders')
     .before(serviceHooks.addDelay(config.delay))
