@@ -1,3 +1,4 @@
+import 'babel/polyfill';
 import feathers from 'feathers';
 import bodyParser from 'body-parser';
 import hooks from 'feathers-hooks';
