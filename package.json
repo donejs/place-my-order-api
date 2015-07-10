@@ -29,11 +29,11 @@
   },
   "homepage": "https://github.com/donejs/place-my-order-api",
   "devDependencies": {
-    "babel": "^5.5.3",
     "jshint": "^2.7.0",
     "mocha": "^2.2.5"
   },
   "dependencies": {
+    "babel": "^5.5.3",
     "body-parser": "^1.12.4",
     "commander": "^2.8.1",
     "feathers": "^1.1.0-pre.0",
