@@ -1,5 +1,7 @@
 # place-my-order-api
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/donejs/place-my-order-api.svg)](https://greenkeeper.io/)
+
 The REST and real-time API for place-my-order.com. Built with Feathers and MongoDB.
 
 ## MongoDB
