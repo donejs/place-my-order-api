@@ -56,6 +56,7 @@ const api = feathers()
 
   api.service('orders')
     .before(serviceHooks.addDelay(config.delay))
+    .before(serviceHooks.useFilter)
     .before(serviceHooks.convertOrderItems)
     .before({
       find: serviceHooks.allowArray('status')
@@ -65,6 +66,7 @@ const api = feathers()
 
   api.service('restaurants')
     .before(serviceHooks.addDelay(config.delay))
+    .before(serviceHooks.useFilter)
     .before({
       get: serviceHooks.alternateId('slug')
     }).after({

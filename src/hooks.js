@@ -51,3 +51,11 @@ exports.addDelay = function addDelay(delay) {
     setTimeout(next, delay);
   };
 };
+
+exports.useFilter = function (hook, next) {
+  // use the 'filter' if it exists
+  var query = hook.params.query;
+  hook.params.query = (query && query.filter) || query;
+
+  next();
+};
