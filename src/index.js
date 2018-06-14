@@ -12,7 +12,8 @@ import serviceHooks from './hooks';
 function fromRestaurants(mapper) {
   return function(req, res, next) {
     let query = {};
-    Object.keys(req.query).forEach(key => query[`address.${key}`] = req.query[key]);
+    let reqQuery = req.query.filter || req.query;
+    Object.keys(reqQuery).forEach(key => query[`address.${key}`] = reqQuery[key]);
     req.app.service('restaurants').find({ query },
       (error, restaurants) => {
         if(error) {
