@@ -52,6 +52,7 @@ const api = feathers()
 
       return Object.keys(result).map(key => result[key]);
     }))
+    .use('/node_modules', feathers.static('node_modules'))
     .use('/restaurants', new NeDB('restaurants'))
     .use('/orders', new NeDB('orders'));
 
