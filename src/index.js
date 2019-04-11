@@ -1,3 +1,4 @@
+import path from "path";
 import 'babel/polyfill';
 import feathers from 'feathers';
 import bodyParser from 'body-parser';
@@ -52,7 +53,7 @@ const api = feathers()
 
       return Object.keys(result).map(key => result[key]);
     }))
-    .use('/api/resources', feathers.static('node_modules/place-my-order-assets'))
+    .use('/api/resources', feathers.static(path.join('node_modules', 'place-my-order-assets')))
     .use('/restaurants', new NeDB('restaurants'))
     .use('/orders', new NeDB('orders'));
 
