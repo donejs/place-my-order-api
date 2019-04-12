@@ -1,3 +1,5 @@
+import path from "path";
+import fs from "fs";
 import 'babel/polyfill';
 import feathers from 'feathers';
 import bodyParser from 'body-parser';
@@ -8,6 +10,13 @@ import madison from 'madison';
 import config from './config';
 import importer from './importer';
 import serviceHooks from './hooks';
+
+const apiResourcesPath = path.resolve(__dirname, "..", "node_modules", "place-my-order-assets");
+if (fs.existsSync(apiResourcesPath)) {
+  console.log(`URLs starting with "api/resources" will be served from "${apiResourcesPath}"`);
+} else {
+  console.log(`URLs starting with "api/resources" will NOT be served. The path "${apiResourcesPath}" does NOT exist.`);
+}
 
 function fromRestaurants(mapper) {
   return function(req, res, next) {
@@ -52,6 +61,7 @@ const api = feathers()
 
       return Object.keys(result).map(key => result[key]);
     }))
+    .use('/api/resources', feathers.static(apiResourcesPath))
     .use('/restaurants', new NeDB('restaurants'))
     .use('/orders', new NeDB('orders'));
 

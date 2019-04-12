@@ -12,6 +12,11 @@ const images = {
   owner: ['node_modules/place-my-order-assets/images/1-owner.jpg', 'node_modules/place-my-order-assets/images/2-owner.jpg', 'node_modules/place-my-order-assets/images/3-owner.jpg', 'node_modules/place-my-order-assets/images/4-owner.jpg'],
   banner: ['node_modules/place-my-order-assets/images/1-banner.jpg', 'node_modules/place-my-order-assets/images/2-banner.jpg', 'node_modules/place-my-order-assets/images/3-banner.jpg', 'node_modules/place-my-order-assets/images/4-banner.jpg']
 };
+const resources = {
+  thumbnail: ['api/resources/images/1-thumbnail.jpg', 'api/resources/images/2-thumbnail.jpg', 'api/resources/images/3-thumbnail.jpg', 'api/resources/images/4-thumbnail.jpg'],
+  owner: ['api/resources/images/1-owner.jpg', 'api/resources/images/2-owner.jpg', 'api/resources/images/3-owner.jpg', 'api/resources/images/4-owner.jpg'],
+  banner: ['api/resources/images/1-banner.jpg', 'api/resources/images/2-banner.jpg', 'api/resources/images/3-banner.jpg', 'api/resources/images/4-banner.jpg']
+};
 const items = [{
     "name": "Spinach Fennel Watercress Ravioli",
     "price": 35.99
@@ -85,6 +90,14 @@ function makeMenu() {
   return result;
 }
 
+function makeResources() {
+  return {
+    thumbnail: random(resources.thumbnail),
+    owner: random(resources.owner),
+    banner: random(resources.banner)
+  };
+}
+
 function makeRestaurant(name, city, state) {
   return {
     name,
@@ -96,7 +109,8 @@ function makeRestaurant(name, city, state) {
       city,
       state,
       zip: random(zips)
-    }
+    },
+    resources: makeResources()
   };
 }
 
