@@ -44,5 +44,8 @@
   },
   "system": {
     "npmDependencies": []
-  }
+  },
+  "bundledDependencies": [
+    "place-my-order-assets"
+  ]
 }
