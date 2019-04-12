@@ -40,7 +40,7 @@
     "feathers-hooks": "^0.5.0",
     "feathers-nedb": "^0.1.0",
     "madison": "0.0.7",
-    "place-my-order-assets": "^0.1.7"
+    "place-my-order-assets": "^0.2.0"
   },
   "system": {
     "npmDependencies": []
