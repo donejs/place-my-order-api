@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import hooks from 'feathers-hooks';
 import NeDB from 'feathers-nedb';
 import madison from 'madison';
+import cors from 'cors';
 
 import config from './config';
 import importer from './importer';
@@ -39,6 +40,7 @@ const api = feathers()
     .configure(hooks())
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({ extended: true }))
+    .use(cors())
     .get('/states', fromRestaurants(restaurants => {
       let result = {};
       restaurants.data.forEach(restaurant => {
