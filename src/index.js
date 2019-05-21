@@ -28,7 +28,7 @@ function fromRestaurants(mapper) {
       (error, restaurants) => {
         if(error) {
           console.log(error);
-          
+          throw(error);
           return next(error);
         }
         res.json({ data: mapper(restaurants) });
