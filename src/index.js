@@ -27,6 +27,7 @@ function fromRestaurants(mapper) {
     req.app.service('restaurants').find({ query },
       (error, restaurants) => {
         if(error) {
+          console.log(error);
           return next(error);
         }
         res.json({ data: mapper(restaurants) });
