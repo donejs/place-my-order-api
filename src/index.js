@@ -20,7 +20,9 @@ if (fs.existsSync(apiResourcesPath)) {
 }
 
 function fromRestaurants(mapper) {
+  console.log('hello fromRestaurants');
   return function(req, res, next) {
+    console.log('hello from retrun func');
     let query = {};
     let reqQuery = req.query.filter || req.query;
     Object.keys(reqQuery).forEach(key => query[`address.${key}`] = reqQuery[key]);
