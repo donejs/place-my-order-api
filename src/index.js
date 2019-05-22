@@ -27,9 +27,12 @@ function fromRestaurants(mapper) {
     let reqQuery = req.query.filter || req.query;
     Object.keys(reqQuery).forEach(key => query[`address.${key}`] = reqQuery[key]);
     req.app.service('restaurants').find({ query }).then((results) => {
-      return res.json({ data: mapper(restaurants) })
+      console.log('results', results);
+      res.json({ data: mapper(results) });
+      next();
     }).catch(function (err) {
-      next(new Error('error', err));
+      console.log('error', err);
+      next(new Error(err));
     });
 
     // req.app.service('restaurants').find({ query },
