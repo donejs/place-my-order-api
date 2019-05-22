@@ -26,23 +26,14 @@ function fromRestaurants(mapper) {
     let query = {};
     let reqQuery = req.query.filter || req.query;
     Object.keys(reqQuery).forEach(key => query[`address.${key}`] = reqQuery[key]);
-    req.app.service('restaurants').find({ query }).then((results) => {
-      console.log('results', results);
-      res.json({ data: mapper(results) });
-      next();
-    }).catch(function (err) {
-      console.log('error', err);
-      next(new Error(err));
-    });
-
-    // req.app.service('restaurants').find({ query },
-    //   (error, restaurants) => {
-    //     console.log('ERROR', error, restaurants, next);
-    //     if(error) {
-    //       return res.json({error: error});
-    //     }
-    //     res.json({ data: mapper(restaurants) });
-    //   });
+    req.app.service('restaurants').find({ query },
+      (error, restaurants) => {
+        console.log('ERROR', error, restaurants, next);
+        if(error) {
+          return res.json({error: error});
+        }
+        res.json({ data: mapper(restaurants) });
+      });
   };
 }
 
