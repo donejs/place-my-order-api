@@ -48,5 +48,8 @@
   },
   "bundledDependencies": [
     "place-my-order-assets"
-  ]
+  ],
+  "engines": {
+    "node": "10.x"
+  }
 }
