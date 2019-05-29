@@ -34,9 +34,13 @@ function fromRestaurants(mapper) {
   };
 }
 
+// Allow CORS websocket connections:
+const io = feathers.socketio();
+io.origins('*:*');
+
 const api = feathers()
     .configure(feathers.rest())
-    .configure(feathers.socketio())
+    .configure(io)
     .configure(hooks())
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({ extended: true }))
