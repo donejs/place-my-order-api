@@ -1,5 +1,8 @@
 language: node_js
 node_js:
-  - "0.10"
-  - "node"
-  - "iojs"
+  - '0.10'
+  - node
+  - iojs
+dist: xenial
+services:
+  - xvfb
