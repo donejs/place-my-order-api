@@ -17,6 +17,14 @@ module.exports = function(api) {
 
   console.log('Dropped database');
   restaurants.forEach(function(restaurant) {
+    for (const menu in restaurant.menu) {
+      for (const menuItem of restaurant.menu[menu]) {
+        if (!menuItem._id) {
+          menuItem._id = restaurantService.db.createNewId();
+        }
+      }
+    }
+
     restaurantService.create(restaurant, {}, function(error, restaurant) {
       console.log('Created restaurant ' +
       restaurant.name + '(' + restaurant._id + ')');
