@@ -1,9 +1,21 @@
 const firstName = ['Brunch', 'Pig', 'Cow', 'Crab', 'Lettuce', 'Bagel'];
 const secondName = ['Place', 'Barn', 'Bar', 'Restaurant', 'Shack'];
 const cities = {
-  MI: ['Detroit', 'Detroit', 'Ann Arbor'],
-  IL: ['Chicago', 'Chicago', 'Chicago', 'Peoria'],
-  WI: ['Milwaukee', 'Green Bay']
+  MI: [
+    { name: 'Detroit', coordinate: { latitude: 42.349953, longitude: -83.075480 } },
+    { name: 'Detroit', coordinate: { latitude: 42.311374, longitude: -82.998525 } },
+    { name: 'Ann Arbor', coordinate: { latitude: 42.280827, longitude: -83.743034 } }
+  ],
+  IL: [
+    { name: 'Chicago', coordinate: { latitude: 41.925334, longitude: -87.727238 } },
+    { name: 'Chicago', coordinate: { latitude: 41.860932, longitude: -87.703877 } },
+    { name: 'Chicago', coordinate: { latitude: 41.831264, longitude: -87.640664 } },
+    { name: 'Peoria', coordinate: { latitude: 40.694592, longitude: -89.590363 } }
+  ],
+  WI: [
+    { name: 'Milwaukee', coordinate: { latitude: 43.038902, longitude: -87.906471 } },
+    { name: 'Green Bay', coordinate: { latitude: 44.492575, longitude: -87.972238 } }
+  ]
 };
 const addresses = ['3108 Winchester Ct.', '230 W Kinzie Street', '1601-1625 N Campbell Ave', '2451 W Washburne Ave', '285 W Adams Ave'];
 const zips = ['60045', '60602', '60632', '48211', '48229', '53205', '53295'];
@@ -98,7 +110,7 @@ function makeResources() {
   };
 }
 
-function makeRestaurant(name, city, state) {
+function makeRestaurant(name, city, state, coordinate) {
   return {
     name,
     slug: name.toLowerCase().replace(/\s/g, '-'),
@@ -110,6 +122,7 @@ function makeRestaurant(name, city, state) {
       state,
       zip: random(zips)
     },
+    coordinate: coordinate,
     resources: makeResources()
   };
 }
@@ -126,8 +139,8 @@ function makeOrder(restaurantIndex) {
 
 function makeFixedRestaurants() {
   let restaurants = [];
-  restaurants.push(makeRestaurant('Cheese Curd City', 'Green Bay', 'WI'));
-  restaurants.push(makeRestaurant('Poutine Palace', 'Green Bay', 'WI'));
+  restaurants.push(makeRestaurant('Cheese Curd City', 'Green Bay', 'WI', { latitude: 44.530768, longitude: -88.049888 }));
+  restaurants.push(makeRestaurant('Poutine Palace', 'Green Bay', 'WI', { latitude: 44.480329, longitude: -88.038207 }));
   return restaurants;
 }
 
@@ -153,7 +166,7 @@ export default function() {
         name = makeName();
       }
       names.push(name);
-      restaurants.push(makeRestaurant(name, city, state));
+      restaurants.push(makeRestaurant(name, city.name, state, city.coordinate));
     }
   }
 
