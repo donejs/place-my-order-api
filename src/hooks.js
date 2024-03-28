@@ -59,3 +59,55 @@ exports.useFilter = function (hook, next) {
 
   next();
 };
+
+// Requiring query params
+exports.checkQueryParam = function checkQueryParm(field) {
+  return function(hook, next) {
+    if(hook.params.query[field]) {
+      next();
+    } else {
+      return next(new Error(`Must query with field ${field}`));
+    }
+  }
+}
+
+// Requiring certain fields to exist
+exports.checkRequiredFields = function checkRequiredFields(fields) {
+  return function(hook, next) {
+    let missingFields= [];
+    let reqData = hook.data;
+    fields.forEach(field => {
+      if(!(field in reqData)) {
+        missingFields.push(field);
+      }
+    });
+
+    if(missingFields.length > 0) {
+      return next(new Error(`Data is missing ${missingFields.join("/")}`));
+    } else {
+      next();
+    }
+  }
+};
+
+// Enforcing Unique pairings for create and avoiding the check if it is a update (update will have an _id)
+exports.checkUniqueConstraint = function checkUniqueConstraint(fields) {
+  return function(hook, next) {
+    if(hook.data._id) {
+      return next();
+    }
+
+    let query = {};
+    let reqData = hook.data;
+    fields.forEach(field => query[field] = reqData[field]);
+
+    this.find({query}, (error, results) => {
+      if (results.data.length > 0) {
+        return next(new Error(`${fields.join('/')} has to be unique but
+          found ${results.data.length} entries.`));
+      }
+
+      next();
+    });
+  }
+}
