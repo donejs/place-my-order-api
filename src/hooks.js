@@ -74,7 +74,7 @@ exports.checkQueryParam = function checkQueryParm(field) {
 // Requiring certain fields to exist
 exports.checkRequiredFields = function checkRequiredFields(fields) {
   return function(hook, next) {
-    let missingFields= [];
+    let missingFields = [];
     let reqData = hook.data;
     fields.forEach(field => {
       if(!(field in reqData)) {

@@ -50,7 +50,7 @@ const favoritesService = {
     } else {
       favoritesDB.create(data, params, callback);
     }
-	}
+  }
 }
 
 const api = feathers()
