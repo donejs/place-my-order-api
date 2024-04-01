@@ -34,6 +34,25 @@ function fromRestaurants(mapper) {
   };
 }
 
+const favoritesDB = new NeDB('favorites')
+// combining update and create into one create endpoint
+const favoritesService = {
+  find: function (params, callback) {
+    return favoritesDB.find(params, callback);
+  },
+  get: function (id, params, callback) {
+    return favoritesDB.get(id, params, callback)
+  },
+  create: function(data, params, callback) {
+    if(data._id) {
+      const { _id, ..._data } = data;
+      favoritesDB.patch(_id, _data, params, callback);
+    } else {
+      favoritesDB.create(data, params, callback);
+    }
+  }
+}
+
 const api = feathers()
     .configure(feathers.rest())
     .configure(feathers.socketio())
@@ -65,7 +84,8 @@ const api = feathers()
     }))
     .use('/api/resources', feathers.static(apiResourcesPath))
     .use('/restaurants', new NeDB('restaurants'))
-    .use('/orders', new NeDB('orders'));
+    .use('/orders', new NeDB('orders'))
+    .use('/favorites', favoritesService);
 
   api.service('orders')
     .before(serviceHooks.addDelay(config.delay))
@@ -83,6 +103,19 @@ const api = feathers()
     .before({
       get: serviceHooks.alternateId('slug')
     }).after({
+      find: serviceHooks.wrapData
+    });
+
+  api.service('favorites')
+    .before(serviceHooks.addDelay(config.delay))
+    .before({
+      create: [
+        serviceHooks.checkRequiredFields(['userId', 'restaurantId', 'favorite', 'datetimeUpdated']), 
+        serviceHooks.checkUniqueConstraint(['userId', 'restaurantId'])  
+      ],
+      find: serviceHooks.checkQueryParam('userId'),
+    }).after({
+      create: serviceHooks.wrapData,
       find: serviceHooks.wrapData
     });
 
